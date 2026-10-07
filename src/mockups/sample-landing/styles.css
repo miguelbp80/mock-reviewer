@@ -1,0 +1,92 @@
+/* Scope every mockup's styles under its own root class. */
+.sl {
+  min-height: 100vh;
+  background: #f6eee7;
+  color: #252423;
+  font-family: Georgia, serif;
+}
+.sl-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 1.5rem;
+  font-family: system-ui, sans-serif;
+}
+.sl-nav nav {
+  display: flex;
+  gap: 1.5rem;
+}
+.sl-nav a {
+  color: inherit;
+}
+.sl-hero {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+}
+.sl-hero h1 {
+  max-width: 36rem;
+  margin: 0 0 1rem;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 500;
+  line-height: 1.05;
+}
+.sl-hero p {
+  max-width: 32rem;
+  font-family: system-ui, sans-serif;
+  font-size: 1.125rem;
+  color: #595653;
+}
+.sl-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  max-width: 32rem;
+  margin-top: 2rem;
+}
+.sl-form input {
+  flex: 1;
+  min-width: 12rem;
+  padding: 0.875rem 1rem;
+  border: 1px solid #beb2ab;
+  border-radius: 0.75rem;
+  font: inherit;
+}
+.sl-form button {
+  padding: 0.875rem 1.25rem;
+  border: 0;
+  border-radius: 0.75rem;
+  background: #ccb6f0;
+  font: 600 1rem system-ui, sans-serif;
+}
+.sl-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+.sl-hero .sl-grid {
+  padding: 2rem 0 0;
+}
+.sl-grid article {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: #fffaf8;
+}
+.sl-grid h2 {
+  margin: 0 0 0.5rem;
+  font-weight: 500;
+}
+.sl-grid p {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  color: #595653;
+}
+.sl-price {
+  font-size: 2rem;
+  color: #252423 !important;
+}

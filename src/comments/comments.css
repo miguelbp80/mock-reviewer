@@ -1,0 +1,222 @@
+/* Comment layer. Prefixed with .mr- so it never collides with mockup styles. */
+:root {
+  --mr-ink: #252423;
+  --mr-muted: #595653;
+  --mr-line: #e1d9d2;
+  --mr-surface: #ffffff;
+  --mr-accent: #7c5cff;
+  --mr-accent-ink: #ffffff;
+  --mr-resolved: #9a948f;
+}
+
+body {
+  margin: 0;
+}
+
+.mr-page {
+  max-width: 40rem;
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+  font-family: system-ui, sans-serif;
+  color: var(--mr-ink);
+  line-height: 1.5;
+}
+
+.mr-stage {
+  position: relative;
+  min-height: 100vh;
+}
+.mr-stage.is-commenting {
+  cursor: crosshair;
+}
+.mr-capture {
+  position: absolute;
+  inset: 0;
+  z-index: 1000;
+  cursor: crosshair;
+}
+
+.mr-pin {
+  position: absolute;
+  z-index: 1001;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  border: 2px solid var(--mr-surface);
+  border-radius: 50% 50% 50% 0;
+  background: var(--mr-accent);
+  color: var(--mr-accent-ink);
+  font: 700 12px/1 system-ui, sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: transform 120ms ease;
+}
+.mr-pin:hover,
+.mr-pin.is-open {
+  transform: scale(1.12);
+}
+.mr-pin:focus-visible {
+  outline: 2px solid var(--mr-ink);
+  outline-offset: 2px;
+}
+.mr-pin.is-resolved {
+  background: var(--mr-resolved);
+}
+.mr-pin.is-draft {
+  pointer-events: none;
+}
+
+.mr-card {
+  position: absolute;
+  z-index: 1002;
+  width: min(320px, calc(100vw - 32px));
+  padding: 12px;
+  border: 1px solid var(--mr-line);
+  border-radius: 12px;
+  background: var(--mr-surface);
+  color: var(--mr-ink);
+  font: 14px/1.45 system-ui, sans-serif;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
+  cursor: auto;
+}
+.mr-card__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.mr-card__title {
+  flex: 1;
+  font-weight: 700;
+}
+.mr-messages {
+  max-height: 240px;
+  margin: 0 0 10px;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+.mr-messages li + li {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--mr-line);
+}
+.mr-meta {
+  margin: 0;
+  color: var(--mr-muted);
+  font-size: 12px;
+}
+.mr-meta strong {
+  color: var(--mr-ink);
+}
+.mr-body {
+  margin: 2px 0 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.mr-composer {
+  display: grid;
+  gap: 8px;
+}
+.mr-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border: 1px solid var(--mr-line);
+  border-radius: 8px;
+  font: inherit;
+  color: var(--mr-ink);
+  resize: vertical;
+}
+.mr-input:focus {
+  outline: 2px solid var(--mr-accent);
+  outline-offset: -1px;
+  border-color: transparent;
+}
+.mr-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.mr-error {
+  margin: 0;
+  color: #b42318;
+  font-size: 12px;
+}
+
+.mr-btn {
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--mr-accent);
+  border-radius: 999px;
+  background: var(--mr-accent);
+  color: var(--mr-accent-ink);
+  font: 600 13px/1 system-ui, sans-serif;
+  cursor: pointer;
+}
+.mr-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.mr-btn--ghost {
+  background: transparent;
+  border-color: var(--mr-line);
+  color: var(--mr-ink);
+}
+.mr-btn--small {
+  min-height: 28px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+.mr-btn:focus-visible,
+.mr-icon:focus-visible {
+  outline: 2px solid var(--mr-ink);
+  outline-offset: 2px;
+}
+.mr-icon {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--mr-muted);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+.mr-icon:hover {
+  background: var(--mr-line);
+}
+
+.mr-toolbar {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1003;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  max-width: calc(100vw - 32px);
+  padding: 8px 8px 8px 8px;
+  border: 1px solid var(--mr-line);
+  border-radius: 999px;
+  background: var(--mr-surface);
+  color: var(--mr-ink);
+  font: 13px/1 system-ui, sans-serif;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+}
+.mr-count {
+  color: var(--mr-muted);
+  padding-right: 6px;
+}
+.mr-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-right: 8px;
+  cursor: pointer;
+}
