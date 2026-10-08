@@ -4,6 +4,14 @@ import { createClient, type Client } from "@libsql/client";
 // in production, where serverless functions have no persistent disk.
 // Files starting with "_" are not exposed as Vercel routes.
 
+// Columns added after the first release. SQLite has no ADD COLUMN IF NOT
+// EXISTS, so existing databases get them through the check below.
+const ANCHOR_COLUMNS = {
+  anchor: "TEXT",
+  anchor_x_pct: "REAL",
+  anchor_y_pct: "REAL",
+} as const;
+
 let client: Client | null = null;
 let ready: Promise<void> | null = null;
 
@@ -13,8 +21,8 @@ export const db = async (): Promise<Client> => {
       url: process.env.TURSO_DATABASE_URL ?? "file:local.db",
       authToken: process.env.TURSO_AUTH_TOKEN,
     });
-    ready = client
-      .batch(
+    ready = (async () => {
+      await client!.batch(
         [
           `CREATE TABLE IF NOT EXISTS comments (
             id TEXT PRIMARY KEY,
@@ -23,6 +31,9 @@ export const db = async (): Promise<Client> => {
             x_pct REAL,
             y_px REAL,
             page_width INTEGER,
+            anchor TEXT,
+            anchor_x_pct REAL,
+            anchor_y_pct REAL,
             author TEXT NOT NULL,
             body TEXT NOT NULL,
             parent_id TEXT REFERENCES comments(id),
@@ -32,8 +43,16 @@ export const db = async (): Promise<Client> => {
           "CREATE INDEX IF NOT EXISTS comments_page ON comments (mockup, path)",
         ],
         "write",
-      )
-      .then(() => undefined);
+      );
+
+      const { rows } = await client!.execute("PRAGMA table_info(comments)");
+      const existing = new Set(rows.map((row) => String(row.name)));
+      for (const [name, type] of Object.entries(ANCHOR_COLUMNS)) {
+        if (!existing.has(name)) {
+          await client!.execute(`ALTER TABLE comments ADD COLUMN ${name} ${type}`);
+        }
+      }
+    })();
   }
   await ready;
   return client;

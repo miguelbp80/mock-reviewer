@@ -10,7 +10,7 @@ export const meta: MockupMeta = {
 };
 
 const Nav = () => (
-  <header className="sl-nav">
+  <header className="sl-nav" data-anchor="nav">
     <strong>Acme Homes</strong>
     <nav>
       <Link href="/">Home</Link>
@@ -21,17 +21,17 @@ const Nav = () => (
 
 const Home = () => (
   <>
-    <section className="sl-hero">
+    <section className="sl-hero" data-anchor="hero">
       <h1>Sell your home on your terms.</h1>
       <p>Compare every option side by side and pick the one that leaves you with the most.</p>
-      <form className="sl-form" onSubmit={(e) => e.preventDefault()}>
+      <form className="sl-form" data-anchor="hero-form" onSubmit={(e) => e.preventDefault()}>
         <input placeholder="Enter your home address" aria-label="Home address" />
         <button type="submit">Get started</button>
       </form>
     </section>
     <section className="sl-grid">
       {["Cash offer", "List with an agent", "Keep and rent"].map((t) => (
-        <article key={t}>
+        <article key={t} data-anchor={`option-${t.toLowerCase().replace(/\s+/g, "-")}`}>
           <h2>{t}</h2>
           <p>Short description of this option and who it is best for.</p>
         </article>
@@ -41,15 +41,15 @@ const Home = () => (
 );
 
 const Pricing = () => (
-  <section className="sl-hero">
+  <section className="sl-hero" data-anchor="pricing-hero">
     <h1>Simple pricing.</h1>
     <p>One flat fee, paid at closing. No surprises.</p>
     <div className="sl-grid">
-      <article>
+      <article data-anchor="pricing-standard">
         <h2>Standard</h2>
         <p className="sl-price">1.5%</p>
       </article>
-      <article>
+      <article data-anchor="pricing-full-service">
         <h2>Full service</h2>
         <p className="sl-price">2.5%</p>
       </article>

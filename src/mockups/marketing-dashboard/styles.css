@@ -1,0 +1,523 @@
+/* Design tokens copied unchanged from Bonus-Website-Redesign DESIGN_SYSTEM.md (sections 1 and 3.2).
+   Frozen foundations: do not add colors or fonts here. Dark and status palettes are proposals in src/styles. */
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&family=Abhaya+Libre:wght@500&display=swap');
+
+.hap-page-scope {
+  --hap-bg-blush: #F6EEE7;
+  --hap-bg-light: #FFFBF9;
+  --hap-bg-white: #FFFAF8;
+  --hap-neutral: #E1D9D2;
+  --hap-accent: #CCB6F0;
+  --hap-accent-hover: #bba2e9;
+  --hap-text: #252423;
+  --hap-text-light: #595653;
+  --hap-border: #BEB2AB;
+  --hap-on-accent: #252423;
+  --hap-chip-bg: rgba(255, 255, 255, 0.76);
+
+  --hap-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --hap-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --hap-dur-fast: 150ms;
+  --hap-dur-base: 240ms;
+  --hap-dur-slow: 420ms;
+
+  min-height: 100vh;
+  font-family: 'Work Sans', sans-serif;
+  color: var(--hap-text);
+  background-color: var(--hap-bg-light);
+  line-height: 1.5;
+}
+.hap-page-scope h1,
+.hap-page-scope h2,
+.hap-page-scope h3 {
+  margin: 0;
+  color: var(--hap-text);
+  font-family: 'Abhaya Libre', serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.hap-page-scope h2 {
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+.hap-page-scope p {
+  margin: 0;
+  color: var(--hap-text-light);
+}
+
+/* Page: minimal. Structure comes from space and hairlines, not from boxes. */
+.mkd {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 5rem;
+}
+.mkd-stack {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.5rem;
+  margin-top: 1.5rem;
+}
+
+/* Simple page title with the theme toggle at the far end */
+.mkd-header {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.hap-page-scope .mkd-title {
+  font-size: 1.75rem;
+  line-height: 1.15;
+}
+@media (min-width: 768px) {
+  .hap-page-scope .mkd-title {
+    font-size: 2.5rem;
+  }
+}
+.mkd-stack > section + section {
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--hap-neutral);
+}
+.mkd-caption {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+}
+
+/* Filters: underline tabs on the left, quiet controls on the right */
+.mkd-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.mkd-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-end;
+}
+.mkd-tabs {
+  display: inline-flex;
+  gap: 1.5rem;
+  border-bottom: 1px solid var(--hap-neutral);
+}
+.mkd-tab {
+  position: relative;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 0.5rem;
+  border: 0;
+  background: transparent;
+  color: var(--hap-text-light);
+  font: 600 0.9375rem/1 'Work Sans', sans-serif;
+  cursor: pointer;
+}
+.mkd-tab[aria-selected='true'] {
+  color: var(--hap-text);
+}
+.mkd-tab::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: var(--hap-text);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.mkd-tab[aria-selected='true']::after {
+  transform: scaleX(1);
+}
+.mkd-field {
+  display: grid;
+  gap: 0.125rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--hap-text-light);
+}
+.mkd-select {
+  min-height: 44px;
+  padding: 0 1.5rem 0 0;
+  border: 0;
+  border-bottom: 1px solid var(--hap-border);
+  border-radius: 0;
+  background: transparent;
+  color: var(--hap-text);
+  font: 500 0.9375rem 'Work Sans', sans-serif;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.mkd-theme {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--hap-neutral);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--hap-text-light);
+  cursor: pointer;
+}
+.mkd-theme[aria-pressed='true'] {
+  border-color: var(--hap-accent);
+  background: var(--hap-accent);
+  color: var(--hap-on-accent);
+}
+
+/* Status chips: color plus text, never color alone. Tokens come from src/styles/status-palette.css */
+.mkd-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 0.75rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.mkd-status--good {
+  background: var(--hap-good-tint);
+  color: var(--hap-good-ink);
+}
+.mkd-status--bad {
+  background: var(--hap-bad-tint);
+  color: var(--hap-bad-ink);
+}
+.mkd-status--neutral {
+  border-color: var(--hap-neutral);
+  color: var(--hap-text-light);
+}
+
+/* Overview: one dominant figure and four supporting figures, no boxes */
+.mkd-overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.5rem;
+}
+@media (min-width: 1024px) {
+  .mkd-overview {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: start;
+  }
+}
+.mkd-hero {
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+}
+.mkd-hero-value {
+  font-family: 'Abhaya Libre', serif;
+  font-size: 4.5rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--hap-text);
+}
+.mkd-hero-caption {
+  font-size: 1rem;
+}
+.mkd-verdict {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  align-items: center;
+  margin-top: 0.5rem;
+  font-size: 0.9375rem;
+}
+.mkd-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mkd-metrics {
+  margin: 1rem 0 0;
+  padding: 0;
+}
+.mkd-metric {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: 'label value' 'sub value';
+  column-gap: 1rem;
+  align-items: center;
+  padding: 1rem 0;
+  border-top: 1px solid var(--hap-neutral);
+}
+.mkd-metric:first-child {
+  border-top: 0;
+}
+.mkd-metric dt {
+  grid-area: label;
+  font-weight: 600;
+  color: var(--hap-text);
+}
+.mkd-metric dd {
+  margin: 0;
+}
+.mkd-metric-value {
+  grid-area: value;
+  font-family: 'Abhaya Libre', serif;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.1;
+  text-align: right;
+  color: var(--hap-text);
+}
+.mkd-metric-value--empty {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--hap-text-light);
+}
+.mkd-metric-sub {
+  grid-area: sub;
+  font-size: 0.8125rem;
+  color: var(--hap-text-light);
+}
+
+/* Charts: two columns from the desktop breakpoint, no surfaces */
+.mkd-charts {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.5rem;
+}
+@media (min-width: 1024px) {
+  .mkd-charts {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+    gap: 4rem;
+  }
+}
+.mkd-charts svg {
+  margin-top: 1rem;
+}
+.mkd-empty {
+  padding: 2rem 0;
+}
+.mkd-legend {
+  display: flex;
+  gap: 1rem;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8125rem;
+  color: var(--hap-text-light);
+}
+.mkd-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 0.375rem;
+  border-radius: 2px;
+  vertical-align: -1px;
+}
+.mkd-swatch--sales {
+  background: var(--hap-accent);
+}
+.mkd-swatch--spend {
+  background: var(--hap-text-light);
+}
+
+/* Results table: always visible, hairlines only, scrolls inside its own box, first column pinned */
+.mkd-table-wrap {
+  margin-top: 1rem;
+  overflow-x: auto;
+}
+.mkd-table {
+  width: 100%;
+  min-width: 52rem;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+.mkd-table th,
+.mkd-table td {
+  padding: 0.875rem 0.75rem;
+  border-top: 1px solid var(--hap-neutral);
+  text-align: right;
+  white-space: nowrap;
+  color: var(--hap-text);
+}
+.mkd-table thead th {
+  border-top: 0;
+  border-bottom: 1px solid var(--hap-border);
+  vertical-align: bottom;
+  white-space: normal;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--hap-text-light);
+}
+.mkd-table th:first-child,
+.mkd-table td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: inherit;
+  text-align: left;
+}
+.mkd-table thead tr,
+.mkd-row-channel {
+  background: var(--hap-bg-light);
+}
+.mkd-row-channel th,
+.mkd-row-channel td {
+  font-weight: 700;
+}
+.mkd-row-campaign {
+  background: var(--hap-bg-blush);
+}
+.mkd-row-campaign th,
+.mkd-row-campaign td {
+  font-weight: 500;
+}
+.mkd-table .mkd-campaign-name {
+  padding-left: 2.25rem;
+}
+.mkd-table .mkd-action {
+  text-align: left;
+}
+.mkd-row-toggle,
+.mkd-row-plain {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  min-height: 44px;
+}
+.mkd-row-toggle {
+  padding: 0 0.25rem;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--hap-text);
+  font: 700 0.9375rem/1 'Work Sans', sans-serif;
+  cursor: pointer;
+}
+.mkd-row-plain {
+  padding-left: calc(0.25rem + 0.5rem + 0.625rem);
+}
+.mkd-row-count {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--hap-text-light);
+}
+.mkd-chevron {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg);
+}
+.mkd-row-toggle[aria-expanded='true'] .mkd-chevron {
+  transform: rotate(45deg);
+}
+
+.mkd-footnote {
+  max-width: 48rem;
+  font-size: 0.8125rem;
+}
+
+/* Visible keyboard focus on every interactive element */
+.mkd-tab:focus-visible,
+.mkd-theme:focus-visible,
+.mkd-select:focus-visible,
+.mkd-row-toggle:focus-visible,
+.mkd-table-wrap:focus-visible {
+  outline: 2px solid var(--hap-text);
+  outline-offset: 2px;
+}
+
+/* Microinteractions. Each one confirms an action the user took.
+   Opacity and color changes stay under reduced motion; movement does not. */
+@keyframes mkd-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* Filter, tab or period change: the content fades in once. */
+.mkd-swap {
+  animation: mkd-fade var(--hap-dur-fast) var(--hap-ease-out);
+}
+/* Opening a channel: its campaign rows fade in. */
+.mkd-row-campaign:not([hidden]) {
+  animation: mkd-fade var(--hap-dur-fast) var(--hap-ease-out);
+}
+/* A status that changes with a filter eases its color. */
+.mkd-status {
+  transition: background-color var(--hap-dur-fast) ease, color var(--hap-dur-fast) ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .mkd-tab::after {
+    transition: transform var(--hap-dur-base) var(--hap-ease-out);
+  }
+  .mkd-tab,
+  .mkd-theme,
+  .mkd-row-toggle {
+    transition: transform var(--hap-dur-fast) var(--hap-ease-out), color var(--hap-dur-fast) ease;
+  }
+  .mkd-chevron {
+    transition: transform var(--hap-dur-fast) var(--hap-ease-out);
+  }
+  .mkd-tab:active,
+  .mkd-theme:active,
+  .mkd-row-toggle:active {
+    transform: scale(0.97);
+  }
+}
+
+/* Hover only on devices that really hover */
+@media (hover: hover) and (pointer: fine) {
+  .mkd-tab:hover {
+    color: var(--hap-text);
+  }
+  .mkd-row-toggle:hover .mkd-row-count {
+    color: var(--hap-text);
+  }
+  .mkd-charts svg .mkd-bar {
+    transition: opacity var(--hap-dur-fast) ease;
+  }
+  .mkd-charts svg:has(.mkd-bar:hover) .mkd-bar:not(:hover) {
+    opacity: 0.5;
+  }
+}
+
+/* Visually hidden, still announced to screen readers */
+.mkd-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Colored figures in the results table. Text color comes from the proposed status inks. */
+.mkd-figure--good {
+  color: var(--hap-good-ink);
+}
+.mkd-figure--bad {
+  color: var(--hap-bad-ink);
+}
+.mkd-table .mkd-figure--good,
+.mkd-table .mkd-figure--bad {
+  font-weight: 700;
+}

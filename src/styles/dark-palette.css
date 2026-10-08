@@ -1,0 +1,27 @@
+/* Dark palette: PROPOSAL, not a rule.
+   This is not part of Bonus-Website-Redesign/DESIGN_SYSTEM.md and does not change it.
+   Global to mockup-review: any mockup opts in by adding the class `is-dark` to its
+   `.hap-page-scope` root. It only overrides the --hap-* tokens, so the same markup works in both themes.
+
+   Brand values are kept where they fit on dark: lilac accent (#CCB6F0) and its text (#252423),
+   the warm neutrals (#F6EEE7 blush as text, #BEB2AB as muted text). The surfaces and
+   borders are new, derived from the warm dark base #1c1714.
+
+   Contrast (text on surface): text 13.5-15.5:1, muted text 7.5-8.6:1, on-accent 8.5:1 (WCAG AA body text: 4.5:1). */
+
+.hap-page-scope.is-dark {
+  --hap-bg-light: #1c1714;   /* page background */
+  --hap-bg-blush: #2a231f;   /* panels (was blush) */
+  --hap-bg-white: #241e1b;   /* cards, inputs (was white) */
+  --hap-neutral: #4a3f38;    /* bar tracks, subtle fills */
+  --hap-accent: #CCB6F0;     /* lilac, unchanged */
+  --hap-accent-hover: #bba2e9;
+  --hap-on-accent: #252423;  /* text on lilac */
+  --hap-text: #F6EEE7;       /* headings, emphasis */
+  --hap-text-light: #BEB2AB; /* body, meta */
+  --hap-border: #5a4e46;     /* borders */
+  --hap-chip-bg: rgba(255, 255, 255, 0.08);
+
+  background-color: var(--hap-bg-light);
+  color: var(--hap-text);
+}

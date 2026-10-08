@@ -1,0 +1,393 @@
+{
+  "_meta": {
+    "status": "ASSUMED SAMPLE DATA. Not client data. Used to test the dashboard layout and decision logic.",
+    "currency": "USD",
+    "periods": {
+      "last30": "Last 30 days",
+      "last90": "Last 90 days"
+    },
+    "revenueDefinition": "closedWon x average revenue per closed transaction (fee per line below)",
+    "averageRevenuePerClosing": {
+      "hap": 9500,
+      "res": 7000
+    }
+  },
+  "rules": {
+    "targetMarketingShare": 0.25,
+    "scaleBelowRatio": 0.8,
+    "pauseAboveRatio": 1.25,
+    "minOpportunities": 5,
+    "_explain": "maxCostPerOpportunity = (revenue / opportunities) x targetMarketingShare, per line and period. Campaign action compares its CPO with that maximum."
+  },
+  "lines": {
+    "hap": {
+      "last30": {
+        "facebook": {
+          "campaigns": [
+            {
+              "name": "Homeowner equity Q4",
+              "spend": 9800,
+              "leads": 480,
+              "qualified": 112,
+              "opportunities": 33,
+              "closedWon": 5,
+              "sales": 47500
+            },
+            {
+              "name": "Retargeting site visitors",
+              "spend": 5200,
+              "leads": 260,
+              "qualified": 58,
+              "opportunities": 19,
+              "closedWon": 3,
+              "sales": 28500
+            },
+            {
+              "name": "Lookalike homeowners 35-55",
+              "spend": 3400,
+              "leads": 180,
+              "qualified": 40,
+              "opportunities": 12,
+              "closedWon": 1,
+              "sales": 9500
+            }
+          ]
+        },
+        "instagram": {
+          "campaigns": [
+            {
+              "name": "Reels: how it works",
+              "spend": 6100,
+              "leads": 340,
+              "qualified": 71,
+              "opportunities": 20,
+              "closedWon": 3,
+              "sales": 28500
+            },
+            {
+              "name": "Stories: testimonials",
+              "spend": 3500,
+              "leads": 200,
+              "qualified": 47,
+              "opportunities": 11,
+              "closedWon": 1,
+              "sales": 9500
+            }
+          ]
+        },
+        "youtube": {
+          "campaigns": [
+            {
+              "name": "Pre-roll homeowners",
+              "spend": 4200,
+              "leads": 150,
+              "qualified": 30,
+              "opportunities": 8,
+              "closedWon": 1,
+              "sales": 9500
+            },
+            {
+              "name": "Explainer videos",
+              "spend": 1800,
+              "leads": 70,
+              "qualified": 14,
+              "opportunities": 3,
+              "closedWon": 0,
+              "sales": 0
+            }
+          ]
+        },
+        "blog": {
+          "spend": null,
+          "leads": 380,
+          "qualified": 96,
+          "opportunities": 27,
+          "closedWon": 5,
+          "sales": 47500
+        }
+      },
+      "last90": {
+        "facebook": {
+          "campaigns": [
+            {
+              "name": "Homeowner equity Q4",
+              "spend": 28400,
+              "leads": 1390,
+              "qualified": 325,
+              "opportunities": 96,
+              "closedWon": 15,
+              "sales": 142500
+            },
+            {
+              "name": "Retargeting site visitors",
+              "spend": 15100,
+              "leads": 760,
+              "qualified": 170,
+              "opportunities": 55,
+              "closedWon": 8,
+              "sales": 76000
+            },
+            {
+              "name": "Lookalike homeowners 35-55",
+              "spend": 9600,
+              "leads": 520,
+              "qualified": 116,
+              "opportunities": 35,
+              "closedWon": 3,
+              "sales": 28500
+            }
+          ]
+        },
+        "instagram": {
+          "campaigns": [
+            {
+              "name": "Reels: how it works",
+              "spend": 17700,
+              "leads": 990,
+              "qualified": 205,
+              "opportunities": 58,
+              "closedWon": 9,
+              "sales": 85500
+            },
+            {
+              "name": "Stories: testimonials",
+              "spend": 10100,
+              "leads": 570,
+              "qualified": 136,
+              "opportunities": 32,
+              "closedWon": 3,
+              "sales": 28500
+            }
+          ]
+        },
+        "youtube": {
+          "campaigns": [
+            {
+              "name": "Pre-roll homeowners",
+              "spend": 12200,
+              "leads": 430,
+              "qualified": 86,
+              "opportunities": 23,
+              "closedWon": 3,
+              "sales": 28500
+            },
+            {
+              "name": "Explainer videos",
+              "spend": 5200,
+              "leads": 200,
+              "qualified": 40,
+              "opportunities": 9,
+              "closedWon": 1,
+              "sales": 9500
+            }
+          ]
+        },
+        "blog": {
+          "spend": null,
+          "leads": 1090,
+          "qualified": 277,
+          "opportunities": 78,
+          "closedWon": 14,
+          "sales": 133000
+        }
+      }
+    },
+    "res": {
+      "last30": {
+        "facebook": {
+          "campaigns": [
+            {
+              "name": "Sellers: 60-day listing",
+              "spend": 4100,
+              "leads": 190,
+              "qualified": 34,
+              "opportunities": 11,
+              "closedWon": 2,
+              "sales": 14000
+            },
+            {
+              "name": "Buyers: pre-approval",
+              "spend": 2800,
+              "leads": 120,
+              "qualified": 24,
+              "opportunities": 8,
+              "closedWon": 1,
+              "sales": 7000
+            }
+          ]
+        },
+        "instagram": {
+          "campaigns": [
+            {
+              "name": "Agent referral reels",
+              "spend": 2100,
+              "leads": 120,
+              "qualified": 18,
+              "opportunities": 5,
+              "closedWon": 1,
+              "sales": 7000
+            },
+            {
+              "name": "Sell faster stories",
+              "spend": 1000,
+              "leads": 70,
+              "qualified": 11,
+              "opportunities": 3,
+              "closedWon": 0,
+              "sales": 0
+            }
+          ]
+        },
+        "youtube": {
+          "campaigns": [
+            {
+              "name": "Market update",
+              "spend": 1200,
+              "leads": 50,
+              "qualified": 9,
+              "opportunities": 2,
+              "closedWon": 0,
+              "sales": 0
+            },
+            {
+              "name": "Real estate agents",
+              "spend": 900,
+              "leads": 30,
+              "qualified": 6,
+              "opportunities": 2,
+              "closedWon": 0,
+              "sales": 0
+            }
+          ]
+        },
+        "blog": {
+          "spend": null,
+          "leads": 120,
+          "qualified": 24,
+          "opportunities": 6,
+          "closedWon": 2,
+          "sales": 14000
+        }
+      },
+      "last90": {
+        "facebook": {
+          "campaigns": [
+            {
+              "name": "Sellers: 60-day listing",
+              "spend": 11900,
+              "leads": 560,
+              "qualified": 98,
+              "opportunities": 32,
+              "closedWon": 6,
+              "sales": 42000
+            },
+            {
+              "name": "Buyers: pre-approval",
+              "spend": 8100,
+              "leads": 350,
+              "qualified": 70,
+              "opportunities": 23,
+              "closedWon": 3,
+              "sales": 21000
+            }
+          ]
+        },
+        "instagram": {
+          "campaigns": [
+            {
+              "name": "Agent referral reels",
+              "spend": 6100,
+              "leads": 350,
+              "qualified": 52,
+              "opportunities": 14,
+              "closedWon": 3,
+              "sales": 21000
+            },
+            {
+              "name": "Sell faster stories",
+              "spend": 2800,
+              "leads": 190,
+              "qualified": 32,
+              "opportunities": 8,
+              "closedWon": 1,
+              "sales": 7000
+            }
+          ]
+        },
+        "youtube": {
+          "campaigns": [
+            {
+              "name": "Market update",
+              "spend": 3500,
+              "leads": 150,
+              "qualified": 27,
+              "opportunities": 6,
+              "closedWon": 1,
+              "sales": 7000
+            },
+            {
+              "name": "Real estate agents",
+              "spend": 2600,
+              "leads": 90,
+              "qualified": 17,
+              "opportunities": 5,
+              "closedWon": 0,
+              "sales": 0
+            }
+          ]
+        },
+        "blog": {
+          "spend": null,
+          "leads": 350,
+          "qualified": 70,
+          "opportunities": 17,
+          "closedWon": 6,
+          "sales": 42000
+        }
+      }
+    }
+  },
+  "tests": {
+    "hap": [
+      {
+        "channel": "youtube",
+        "method": "Geo holdout",
+        "period": "Sep 2026",
+        "metric": "Qualified leads",
+        "result": "+14% in test regions vs control",
+        "confidence": "Moderate",
+        "decision": "Keep YouTube budget; retest in Q4"
+      },
+      {
+        "channel": "blog",
+        "method": "Branded search lift",
+        "period": "Aug 2026",
+        "metric": "Branded search volume",
+        "result": "+9%",
+        "confidence": "Low",
+        "decision": "Keep content plan"
+      }
+    ],
+    "res": [
+      {
+        "channel": "facebook",
+        "method": "Audience split test",
+        "period": "Sep 2026",
+        "metric": "Opportunities",
+        "result": "Agent-referral audience +22% vs control",
+        "confidence": "Low",
+        "decision": "Retest with a larger sample"
+      }
+    ]
+  },
+  "reactivation": {
+    "hap": {
+      "Nurture: 3-6 months": 412,
+      "Nurture: 6+ months": 1280
+    },
+    "res": {
+      "Nurture: 3-6 months": 96,
+      "Nurture: 6+ months": 214
+    }
+  }
+}

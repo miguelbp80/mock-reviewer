@@ -8,6 +8,7 @@ import { db } from "./_db.js";
  */
 
 const MOCKUP_ID = /^[a-z0-9-]{3,80}$/;
+const ANCHOR_ID = /^[a-z0-9-]{1,60}$/;
 const LIMITS = { author: 60, body: 2000, path: 300 };
 
 const json = (data: unknown, status = 200) =>
@@ -38,7 +39,8 @@ export async function GET(req: Request) {
 
   const client = await db();
   const { rows } = await client.execute({
-    sql: `SELECT id, path, x_pct, y_px, page_width, author, body, parent_id, status, created_at
+    sql: `SELECT id, path, x_pct, y_px, page_width, anchor, anchor_x_pct, anchor_y_pct,
+                 author, body, parent_id, status, created_at
           FROM comments WHERE mockup = ? AND path = ? ORDER BY created_at`,
     args: [mockup, path],
   });
@@ -75,10 +77,32 @@ export async function POST(req: Request) {
     const y = Number(input.y_px);
     const width = Number(input.page_width);
     if (!(x >= 0 && x <= 100) || !(y >= 0) || !(width > 0)) return json({ error: "Invalid position" }, 400);
+
+    // Optional element anchor: the pin follows data-anchor="<anchor>" at this
+    // offset (in % of the element's box). x_pct / y_px stay as the fallback.
+    let anchor: string | null = null;
+    let anchorX: number | null = null;
+    let anchorY: number | null = null;
+    if (input.anchor != null) {
+      const ax = Number(input.anchor_x_pct);
+      const ay = Number(input.anchor_y_pct);
+      if (
+        typeof input.anchor !== "string" ||
+        !ANCHOR_ID.test(input.anchor) ||
+        !(ax >= 0 && ax <= 100) ||
+        !(ay >= 0 && ay <= 100)
+      ) {
+        return json({ error: "Invalid anchor" }, 400);
+      }
+      anchor = input.anchor;
+      anchorX = ax;
+      anchorY = ay;
+    }
+
     await client.execute({
-      sql: `INSERT INTO comments (id, mockup, path, x_pct, y_px, page_width, author, body)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-      args: [id, mockup, path, x, y, Math.round(width), author, body],
+      sql: `INSERT INTO comments (id, mockup, path, x_pct, y_px, page_width, anchor, anchor_x_pct, anchor_y_pct, author, body)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      args: [id, mockup, path, x, y, Math.round(width), anchor, anchorX, anchorY, author, body],
     });
   }
   return json({ id }, 201);

@@ -45,6 +45,6 @@ All pages send `noindex` (`index.html` meta + `X-Robots-Tag` in `vercel.json`).
 
 ## Known PoC limits
 
-- Pins are placed by coordinates: if a layout changes a lot between widths, a pin can land off its element. The saved `page_width` helps judge that.
+- Pins placed outside any `data-anchor` element use coordinates, so they can land off their element when the layout changes. Anchored pins follow their element; if it is hidden at a width, the pin stays at its saved position and is drawn dashed.
 - Anyone with the link can comment and resolve. The API has input limits and a best-effort rate limit.
 - No notifications, edit or delete yet. See the spec phases.

@@ -64,6 +64,10 @@ body {
 .mr-pin.is-resolved {
   background: var(--mr-resolved);
 }
+.mr-pin.is-approx {
+  border-style: dashed;
+  opacity: 0.85;
+}
 .mr-pin.is-draft {
   pointer-events: none;
 }

@@ -4,6 +4,10 @@ export type Comment = {
   x_pct: number | null;
   y_px: number | null;
   page_width: number | null;
+  /** data-anchor name of the element the pin is attached to, if any. */
+  anchor: string | null;
+  anchor_x_pct: number | null;
+  anchor_y_pct: number | null;
   author: string;
   body: string;
   parent_id: string | null;
@@ -43,6 +47,9 @@ export const createComment = (input: {
   x_pct?: number;
   y_px?: number;
   page_width?: number;
+  anchor?: string;
+  anchor_x_pct?: number;
+  anchor_y_pct?: number;
 }) => request<{ id: string }>("/api/comments", { method: "POST", body: JSON.stringify(input) });
 
 export const setStatus = (id: string, status: "open" | "resolved") =>

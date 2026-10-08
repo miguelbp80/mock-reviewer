@@ -1,0 +1,30 @@
+/* Status palette: PROPOSAL, not a rule.
+   Not part of Bonus-Website-Redesign/DESIGN_SYSTEM.md and it does not change it.
+   Global to mockup-review. Adds semantic good / bad tokens on top of the --hap-* tokens.
+
+   The green indicator (#16a34a) is the value DESIGN_SYSTEM.md already lists for the
+   "appreciation earned" figure. The red and the tints are new, proposed here.
+
+   Use rule: color is never the only signal. Every status also carries text.
+   - --hap-good / --hap-bad: fills and marks only (bars, dots). Contrast on the page 3.2:1 / 4.7:1.
+   - --hap-good-ink / --hap-bad-ink: text. 6.9:1 / 8.1:1 on the page, 6.2:1 / 6.9:1 on their tint.
+   - --hap-good-tint / --hap-bad-tint: chip backgrounds. */
+
+.hap-page-scope {
+  --hap-good: #16a34a;
+  --hap-good-ink: #166534;
+  --hap-good-tint: #E4F3E8;
+  --hap-bad: #dc2626;
+  --hap-bad-ink: #991b1b;
+  --hap-bad-tint: #FBE6E3;
+}
+
+/* Dark: lighter indicators and inks, deep tints. Text 7.5:1 to 12.7:1. */
+.hap-page-scope.is-dark {
+  --hap-good: #4ade80;
+  --hap-good-ink: #86efac;
+  --hap-good-tint: #1f3a2a;
+  --hap-bad: #f87171;
+  --hap-bad-ink: #fca5a5;
+  --hap-bad-tint: #412220;
+}
