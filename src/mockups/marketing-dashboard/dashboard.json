@@ -10,7 +10,8 @@
     "averageRevenuePerClosing": {
       "hap": 9500,
       "res": 7000
-    }
+    },
+    "sentToRes": "Sent to RES: leads handed to RES. Assumed sample values, never above total leads."
   },
   "rules": {
     "targetMarketingShare": 0.25,
@@ -31,7 +32,8 @@
               "qualified": 112,
               "opportunities": 33,
               "closedWon": 5,
-              "sales": 47500
+              "sales": 47500,
+              "sentToRes": 78
             },
             {
               "name": "Retargeting site visitors",
@@ -40,7 +42,8 @@
               "qualified": 58,
               "opportunities": 19,
               "closedWon": 3,
-              "sales": 28500
+              "sales": 28500,
+              "sentToRes": 41
             },
             {
               "name": "Lookalike homeowners 35-55",
@@ -49,7 +52,8 @@
               "qualified": 40,
               "opportunities": 12,
               "closedWon": 1,
-              "sales": 9500
+              "sales": 9500,
+              "sentToRes": 28
             }
           ]
         },
@@ -62,7 +66,8 @@
               "qualified": 71,
               "opportunities": 20,
               "closedWon": 3,
-              "sales": 28500
+              "sales": 28500,
+              "sentToRes": 50
             },
             {
               "name": "Stories: testimonials",
@@ -71,7 +76,8 @@
               "qualified": 47,
               "opportunities": 11,
               "closedWon": 1,
-              "sales": 9500
+              "sales": 9500,
+              "sentToRes": 33
             }
           ]
         },
@@ -84,7 +90,8 @@
               "qualified": 30,
               "opportunities": 8,
               "closedWon": 1,
-              "sales": 9500
+              "sales": 9500,
+              "sentToRes": 21
             },
             {
               "name": "Explainer videos",
@@ -93,7 +100,8 @@
               "qualified": 14,
               "opportunities": 3,
               "closedWon": 0,
-              "sales": 0
+              "sales": 0,
+              "sentToRes": 10
             }
           ]
         },
@@ -103,7 +111,8 @@
           "qualified": 96,
           "opportunities": 27,
           "closedWon": 5,
-          "sales": 47500
+          "sales": 47500,
+          "sentToRes": 67
         }
       },
       "last90": {
@@ -116,7 +125,8 @@
               "qualified": 325,
               "opportunities": 96,
               "closedWon": 15,
-              "sales": 142500
+              "sales": 142500,
+              "sentToRes": 227
             },
             {
               "name": "Retargeting site visitors",
@@ -125,7 +135,8 @@
               "qualified": 170,
               "opportunities": 55,
               "closedWon": 8,
-              "sales": 76000
+              "sales": 76000,
+              "sentToRes": 119
             },
             {
               "name": "Lookalike homeowners 35-55",
@@ -134,7 +145,8 @@
               "qualified": 116,
               "opportunities": 35,
               "closedWon": 3,
-              "sales": 28500
+              "sales": 28500,
+              "sentToRes": 81
             }
           ]
         },
@@ -147,7 +159,8 @@
               "qualified": 205,
               "opportunities": 58,
               "closedWon": 9,
-              "sales": 85500
+              "sales": 85500,
+              "sentToRes": 144
             },
             {
               "name": "Stories: testimonials",
@@ -156,7 +169,8 @@
               "qualified": 136,
               "opportunities": 32,
               "closedWon": 3,
-              "sales": 28500
+              "sales": 28500,
+              "sentToRes": 95
             }
           ]
         },
@@ -169,7 +183,8 @@
               "qualified": 86,
               "opportunities": 23,
               "closedWon": 3,
-              "sales": 28500
+              "sales": 28500,
+              "sentToRes": 60
             },
             {
               "name": "Explainer videos",
@@ -178,7 +193,8 @@
               "qualified": 40,
               "opportunities": 9,
               "closedWon": 1,
-              "sales": 9500
+              "sales": 9500,
+              "sentToRes": 28
             }
           ]
         },
@@ -188,7 +204,8 @@
           "qualified": 277,
           "opportunities": 78,
           "closedWon": 14,
-          "sales": 133000
+          "sales": 133000,
+          "sentToRes": 194
         }
       }
     },
@@ -203,7 +220,8 @@
               "qualified": 34,
               "opportunities": 11,
               "closedWon": 2,
-              "sales": 14000
+              "sales": 14000,
+              "sentToRes": 24
             },
             {
               "name": "Buyers: pre-approval",
@@ -212,7 +230,8 @@
               "qualified": 24,
               "opportunities": 8,
               "closedWon": 1,
-              "sales": 7000
+              "sales": 7000,
+              "sentToRes": 17
             }
           ]
         },
@@ -225,7 +244,8 @@
               "qualified": 18,
               "opportunities": 5,
               "closedWon": 1,
-              "sales": 7000
+              "sales": 7000,
+              "sentToRes": 13
             },
             {
               "name": "Sell faster stories",
@@ -234,7 +254,8 @@
               "qualified": 11,
               "opportunities": 3,
               "closedWon": 0,
-              "sales": 0
+              "sales": 0,
+              "sentToRes": 8
             }
           ]
         },
@@ -247,7 +268,8 @@
               "qualified": 9,
               "opportunities": 2,
               "closedWon": 0,
-              "sales": 0
+              "sales": 0,
+              "sentToRes": 6
             },
             {
               "name": "Real estate agents",
@@ -256,7 +278,8 @@
               "qualified": 6,
               "opportunities": 2,
               "closedWon": 0,
-              "sales": 0
+              "sales": 0,
+              "sentToRes": 4
             }
           ]
         },
@@ -266,7 +289,8 @@
           "qualified": 24,
           "opportunities": 6,
           "closedWon": 2,
-          "sales": 14000
+          "sales": 14000,
+          "sentToRes": 17
         }
       },
       "last90": {
@@ -279,7 +303,8 @@
               "qualified": 98,
               "opportunities": 32,
               "closedWon": 6,
-              "sales": 42000
+              "sales": 42000,
+              "sentToRes": 69
             },
             {
               "name": "Buyers: pre-approval",
@@ -288,7 +313,8 @@
               "qualified": 70,
               "opportunities": 23,
               "closedWon": 3,
-              "sales": 21000
+              "sales": 21000,
+              "sentToRes": 49
             }
           ]
         },
@@ -301,7 +327,8 @@
               "qualified": 52,
               "opportunities": 14,
               "closedWon": 3,
-              "sales": 21000
+              "sales": 21000,
+              "sentToRes": 36
             },
             {
               "name": "Sell faster stories",
@@ -310,7 +337,8 @@
               "qualified": 32,
               "opportunities": 8,
               "closedWon": 1,
-              "sales": 7000
+              "sales": 7000,
+              "sentToRes": 22
             }
           ]
         },
@@ -323,7 +351,8 @@
               "qualified": 27,
               "opportunities": 6,
               "closedWon": 1,
-              "sales": 7000
+              "sales": 7000,
+              "sentToRes": 19
             },
             {
               "name": "Real estate agents",
@@ -332,7 +361,8 @@
               "qualified": 17,
               "opportunities": 5,
               "closedWon": 0,
-              "sales": 0
+              "sales": 0,
+              "sentToRes": 12
             }
           ]
         },
@@ -342,7 +372,8 @@
           "qualified": 70,
           "opportunities": 17,
           "closedWon": 6,
-          "sales": 42000
+          "sales": 42000,
+          "sentToRes": 49
         }
       }
     }
@@ -388,6 +419,245 @@
     "res": {
       "Nurture: 3-6 months": 96,
       "Nurture: 6+ months": 214
+    }
+  },
+  "markets": {
+    "_note": "ASSUMED SAMPLE DATA, already aggregated by market. The ZIP to market mapping (Salesforce ZIP + reference sheet) is pending; replace this block when the sheet exists. Totals match the all-channels totals of lines.",
+    "res": {
+      "last30": [
+        {
+          "market": "Atlanta",
+          "leads": 168,
+          "qualified": 30,
+          "sentToRes": 21,
+          "opportunities": 9,
+          "closedWon": 1
+        },
+        {
+          "market": "Boise",
+          "leads": 56,
+          "qualified": 10,
+          "sentToRes": 7,
+          "opportunities": 3,
+          "closedWon": 0
+        },
+        {
+          "market": "Cleveland",
+          "leads": 98,
+          "qualified": 18,
+          "sentToRes": 12,
+          "opportunities": 5,
+          "closedWon": 1
+        },
+        {
+          "market": "Phoenix",
+          "leads": 140,
+          "qualified": 25,
+          "sentToRes": 18,
+          "opportunities": 7,
+          "closedWon": 1
+        },
+        {
+          "market": "Charlotte",
+          "leads": 91,
+          "qualified": 16,
+          "sentToRes": 12,
+          "opportunities": 5,
+          "closedWon": 1
+        },
+        {
+          "market": "Nashville",
+          "leads": 77,
+          "qualified": 14,
+          "sentToRes": 10,
+          "opportunities": 4,
+          "closedWon": 1
+        },
+        {
+          "market": "Tampa",
+          "leads": 70,
+          "qualified": 13,
+          "sentToRes": 9,
+          "opportunities": 4,
+          "closedWon": 1
+        }
+      ],
+      "last90": [
+        {
+          "market": "Atlanta",
+          "leads": 490,
+          "qualified": 88,
+          "sentToRes": 61,
+          "opportunities": 25,
+          "closedWon": 5
+        },
+        {
+          "market": "Boise",
+          "leads": 163,
+          "qualified": 29,
+          "sentToRes": 20,
+          "opportunities": 8,
+          "closedWon": 2
+        },
+        {
+          "market": "Cleveland",
+          "leads": 286,
+          "qualified": 51,
+          "sentToRes": 36,
+          "opportunities": 15,
+          "closedWon": 3
+        },
+        {
+          "market": "Phoenix",
+          "leads": 408,
+          "qualified": 73,
+          "sentToRes": 51,
+          "opportunities": 21,
+          "closedWon": 4
+        },
+        {
+          "market": "Charlotte",
+          "leads": 265,
+          "qualified": 48,
+          "sentToRes": 33,
+          "opportunities": 14,
+          "closedWon": 3
+        },
+        {
+          "market": "Nashville",
+          "leads": 224,
+          "qualified": 40,
+          "sentToRes": 28,
+          "opportunities": 12,
+          "closedWon": 2
+        },
+        {
+          "market": "Tampa",
+          "leads": 204,
+          "qualified": 37,
+          "sentToRes": 27,
+          "opportunities": 10,
+          "closedWon": 1
+        }
+      ]
+    },
+    "hap": {
+      "last30": [
+        {
+          "market": "Atlanta",
+          "leads": 494,
+          "qualified": 112,
+          "sentToRes": 79,
+          "opportunities": 32,
+          "closedWon": 5
+        },
+        {
+          "market": "Boise",
+          "leads": 165,
+          "qualified": 37,
+          "sentToRes": 26,
+          "opportunities": 11,
+          "closedWon": 2
+        },
+        {
+          "market": "Cleveland",
+          "leads": 288,
+          "qualified": 66,
+          "sentToRes": 46,
+          "opportunities": 19,
+          "closedWon": 3
+        },
+        {
+          "market": "Phoenix",
+          "leads": 412,
+          "qualified": 94,
+          "sentToRes": 66,
+          "opportunities": 27,
+          "closedWon": 4
+        },
+        {
+          "market": "Charlotte",
+          "leads": 268,
+          "qualified": 61,
+          "sentToRes": 43,
+          "opportunities": 17,
+          "closedWon": 2
+        },
+        {
+          "market": "Nashville",
+          "leads": 227,
+          "qualified": 51,
+          "sentToRes": 36,
+          "opportunities": 15,
+          "closedWon": 2
+        },
+        {
+          "market": "Tampa",
+          "leads": 206,
+          "qualified": 47,
+          "sentToRes": 32,
+          "opportunities": 12,
+          "closedWon": 1
+        }
+      ],
+      "last90": [
+        {
+          "market": "Atlanta",
+          "leads": 1428,
+          "qualified": 325,
+          "sentToRes": 228,
+          "opportunities": 93,
+          "closedWon": 13
+        },
+        {
+          "market": "Boise",
+          "leads": 476,
+          "qualified": 108,
+          "sentToRes": 76,
+          "opportunities": 31,
+          "closedWon": 4
+        },
+        {
+          "market": "Cleveland",
+          "leads": 833,
+          "qualified": 190,
+          "sentToRes": 133,
+          "opportunities": 54,
+          "closedWon": 8
+        },
+        {
+          "market": "Phoenix",
+          "leads": 1190,
+          "qualified": 271,
+          "sentToRes": 190,
+          "opportunities": 77,
+          "closedWon": 11
+        },
+        {
+          "market": "Charlotte",
+          "leads": 774,
+          "qualified": 176,
+          "sentToRes": 123,
+          "opportunities": 50,
+          "closedWon": 7
+        },
+        {
+          "market": "Nashville",
+          "leads": 654,
+          "qualified": 149,
+          "sentToRes": 104,
+          "opportunities": 42,
+          "closedWon": 6
+        },
+        {
+          "market": "Tampa",
+          "leads": 595,
+          "qualified": 136,
+          "sentToRes": 94,
+          "opportunities": 39,
+          "closedWon": 7
+        }
+      ]
     }
   }
 }

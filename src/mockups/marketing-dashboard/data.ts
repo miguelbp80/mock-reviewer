@@ -4,13 +4,13 @@
 import raw from "./dashboard.json";
 
 export type LineId = "hap" | "res";
-export type PeriodId = "last30" | "last90";
 export type PaidChannelId = "facebook" | "instagram" | "youtube";
 export type ChannelId = PaidChannelId | "blog";
 
 export type Metrics = {
   leads: number;
   qualified: number;
+  sentToRes: number;
   opportunities: number;
   closedWon: number;
   sales: number;
@@ -37,11 +37,6 @@ export const LINES: { id: LineId; label: string }[] = [
   { id: "res", label: "RES" },
 ];
 
-export const PERIODS: { id: PeriodId; label: string }[] = [
-  { id: "last30", label: raw._meta.periods.last30 },
-  { id: "last90", label: raw._meta.periods.last90 },
-];
-
 export const CHANNELS: { id: ChannelId; label: string; paid: boolean }[] = [
   { id: "facebook", label: "Facebook", paid: true },
   { id: "instagram", label: "Instagram", paid: true },
@@ -56,65 +51,117 @@ const sumMetrics = (rows: Metrics[]): Metrics =>
     (acc, r) => ({
       leads: acc.leads + r.leads,
       qualified: acc.qualified + r.qualified,
+      sentToRes: acc.sentToRes + r.sentToRes,
       opportunities: acc.opportunities + r.opportunities,
       closedWon: acc.closedWon + r.closedWon,
       sales: acc.sales + r.sales,
     }),
-    { leads: 0, qualified: 0, opportunities: 0, closedWon: 0, sales: 0 },
+    { leads: 0, qualified: 0, sentToRes: 0, opportunities: 0, closedWon: 0, sales: 0 },
   );
 
-type RawPeriod = (typeof raw.lines)["hap"]["last30"];
+/*
+ * The sample file only holds two windows (last 30 and last 90 days). Any other range
+ * (today, this week, this month, a custom range) is ASSUMED: the nearest window is scaled by
+ * days / window length. Real data will come from Salesforce by date, so this goes away then.
+ */
+const windowFor = (days: number) => (days <= 30 ? { key: "last30" as const, length: 30 } : { key: "last90" as const, length: 90 });
 
-const rawPeriod = (line: LineId, period: PeriodId): RawPeriod => raw.lines[line][period];
+type RawLine = (typeof raw.lines)["hap"]["last30"];
 
-/** Campaign rows for one business line and period, keyed by paid channel. */
-export const getCampaigns = (line: LineId, period: PeriodId): Record<PaidChannelId, CampaignRow[]> => {
-  const p = rawPeriod(line, period);
+const scaleCampaign = (line: LineId, c: CampaignRow, f: number): CampaignRow => {
+  const leads = Math.round(c.leads * f);
+  const closedWon = Math.round(c.closedWon * f);
   return {
-    facebook: p.facebook.campaigns,
-    instagram: p.instagram.campaigns,
-    youtube: p.youtube.campaigns,
+    name: c.name,
+    spend: Math.round(c.spend * f),
+    leads,
+    qualified: Math.min(Math.round(c.qualified * f), leads),
+    sentToRes: Math.min(Math.round(c.sentToRes * f), leads),
+    opportunities: Math.round(c.opportunities * f),
+    closedWon,
+    sales: closedWon * raw._meta.averageRevenuePerClosing[line],
   };
 };
 
-/** Channel-level rows for one business line and period, derived from campaigns for paid channels. */
-export const getChannelRows = (line: LineId, period: PeriodId): Record<ChannelId, ChannelRow> => {
-  const campaigns = getCampaigns(line, period);
+/** Campaign rows for one business line and a range of days, keyed by paid channel. */
+export const getCampaigns = (line: LineId, days: number): Record<PaidChannelId, CampaignRow[]> => {
+  const w = windowFor(days);
+  const f = days / w.length;
+  const p: RawLine = raw.lines[line][w.key];
+  const scale = (list: CampaignRow[]) => list.map((c) => scaleCampaign(line, c, f));
+  return {
+    facebook: scale(p.facebook.campaigns),
+    instagram: scale(p.instagram.campaigns),
+    youtube: scale(p.youtube.campaigns),
+  };
+};
+
+/** Channel-level rows, derived from campaigns for paid channels. */
+export const getChannelRows = (line: LineId, days: number): Record<ChannelId, ChannelRow> => {
+  const w = windowFor(days);
+  const f = days / w.length;
+  const campaigns = getCampaigns(line, days);
   const channelOf = (id: PaidChannelId): ChannelRow => {
     const list = campaigns[id];
     return { ...sumMetrics(list), spend: list.reduce((acc, c) => acc + c.spend, 0) };
   };
+  const blog = scaleCampaign(line, { ...raw.lines[line][w.key].blog, name: "Blog", spend: 0 }, f);
   return {
     facebook: channelOf("facebook"),
     instagram: channelOf("instagram"),
     youtube: channelOf("youtube"),
-    blog: rawPeriod(line, period).blog,
+    blog: { leads: blog.leads, qualified: blog.qualified, sentToRes: blog.sentToRes, opportunities: blog.opportunities, closedWon: blog.closedWon, sales: blog.sales, spend: null },
   };
 };
 
-/** Maximum cost per opportunity: revenue per opportunity x target marketing share. */
-export const getMaxCostPerOpportunity = (line: LineId, period: PeriodId): number | null => {
-  const rows = Object.values(getChannelRows(line, period));
-  const total = sumMetrics(rows);
-  if (!total.opportunities) return null;
-  return (total.sales / total.opportunities) * RULES.targetMarketingShare;
+export type MarketRow = {
+  market: string;
+  leads: number;
+  qualified: number;
+  sentToRes: number;
+  opportunities: number;
+  closedWon: number;
 };
 
-/** Marketing efficiency: total revenue / total marketing spend (blog spend is zero). */
-export const getEfficiency = (line: LineId, period: PeriodId): number | null => {
-  const rows = Object.values(getChannelRows(line, period));
-  const total = sumMetrics(rows);
-  const spend = rows.reduce((acc, r) => acc + (r.spend ?? 0), 0);
-  return spend ? total.sales / spend : null;
+const MARKET_KEYS = ["leads", "qualified", "sentToRes", "opportunities", "closedWon"] as const;
+
+/** Splits a total across weights so the parts add up exactly (largest remainder). */
+const allocate = (total: number, weights: number[]): number[] => {
+  const sum = weights.reduce((a, b) => a + b, 0) || 1;
+  const exact = weights.map((w) => (w / sum) * total);
+  const out = exact.map(Math.floor);
+  let left = total - out.reduce((a, b) => a + b, 0);
+  exact
+    .map((v, i) => ({ i, r: v - Math.floor(v) }))
+    .sort((a, b) => b.r - a.r)
+    .forEach(({ i }) => {
+      if (left > 0) {
+        out[i] += 1;
+        left -= 1;
+      }
+    });
+  return out;
 };
 
-/** Decision for one campaign, from its cost per opportunity against the line's maximum. */
-export const getAction = (c: CampaignRow, maxCpo: number | null): Action => {
-  if (maxCpo === null || c.opportunities < RULES.minOpportunities) return "Too early";
-  const cpo = c.spend / c.opportunities;
-  if (cpo <= maxCpo * RULES.scaleBelowRatio) return "Scale";
-  if (cpo > maxCpo * RULES.pauseAboveRatio) return "Pause";
-  return "Keep";
+/**
+ * Leads by market, adding up to the all-channels totals of the same range.
+ * TODO: ZIP to market mapping is pending (needs the reference sheet); market shares come from a pre-aggregated block.
+ */
+export const getMarkets = (line: LineId, days: number): MarketRow[] => {
+  const base = raw.markets[line][windowFor(days).key] as MarketRow[];
+  const rows = getChannelRows(line, days);
+  const total = sumMetrics(Object.values(rows));
+  const parts = Object.fromEntries(
+    MARKET_KEYS.map((k) => [k, allocate(total[k], base.map((m) => m[k]))]),
+  ) as Record<(typeof MARKET_KEYS)[number], number[]>;
+  return base.map((m, i) => ({
+    market: m.market,
+    leads: parts.leads[i],
+    qualified: parts.qualified[i],
+    sentToRes: parts.sentToRes[i],
+    opportunities: parts.opportunities[i],
+    closedWon: parts.closedWon[i],
+  }));
 };
 
 export const getTests = (line: LineId): Test[] => raw.tests[line] as Test[];

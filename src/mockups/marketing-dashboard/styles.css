@@ -1,121 +1,256 @@
-/* Design tokens copied unchanged from Bonus-Website-Redesign DESIGN_SYSTEM.md (sections 1 and 3.2).
-   Frozen foundations: do not add colors or fonts here. Dark and status palettes are proposals in src/styles. */
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&family=Abhaya+Libre:wght@500&display=swap');
+/* Marketing dashboard. Pragmatic, utility-first look: system font, neutral greys, one blue accent.
+   It does not use the client design system on purpose (this is a redesign experiment).
+   The previous version is kept outside the project in the session scratchpad. */
 
-.hap-page-scope {
-  --hap-bg-blush: #F6EEE7;
-  --hap-bg-light: #FFFBF9;
-  --hap-bg-white: #FFFAF8;
-  --hap-neutral: #E1D9D2;
-  --hap-accent: #CCB6F0;
-  --hap-accent-hover: #bba2e9;
-  --hap-text: #252423;
-  --hap-text-light: #595653;
-  --hap-border: #BEB2AB;
-  --hap-on-accent: #252423;
-  --hap-chip-bg: rgba(255, 255, 255, 0.76);
+.mkd-root {
+  --mk-bg: #f4f5f7;
+  --mk-surface: #ffffff;
+  --mk-surface-2: #f0f2f5;
+  --mk-border: #d5d9e0;
+  --mk-text: #111827;
+  --mk-text-muted: #4b5563;
+  --mk-accent: #1d4ed8;
+  --mk-accent-soft: #dbe6ff;
+  --mk-on-accent: #ffffff;
 
-  --hap-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --hap-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --hap-dur-fast: 150ms;
-  --hap-dur-base: 240ms;
-  --hap-dur-slow: 420ms;
+  --mk-ease: cubic-bezier(0.22, 1, 0.36, 1);
 
   min-height: 100vh;
-  font-family: 'Work Sans', sans-serif;
-  color: var(--hap-text);
-  background-color: var(--hap-bg-light);
-  line-height: 1.5;
+  background: var(--mk-bg);
+  color: var(--mk-text);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
 }
-.hap-page-scope h1,
-.hap-page-scope h2,
-.hap-page-scope h3 {
+.mkd-root.is-dark {
+  --mk-bg: #0e1115;
+  --mk-surface: #161a20;
+  --mk-surface-2: #1d222a;
+  --mk-border: #2e3541;
+  --mk-text: #e9edf3;
+  --mk-text-muted: #a5afbd;
+  --mk-accent: #8db4ff;
+  --mk-accent-soft: #24365c;
+  --mk-on-accent: #0e1115;
+}
+.mkd-root h1,
+.mkd-root h2,
+.mkd-root p,
+.mkd-root dl,
+.mkd-root dd {
   margin: 0;
-  color: var(--hap-text);
-  font-family: 'Abhaya Libre', serif;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-}
-.hap-page-scope h2 {
-  font-size: 1.5rem;
-  line-height: 1.2;
-}
-.hap-page-scope p {
-  margin: 0;
-  color: var(--hap-text-light);
 }
 
-/* Page: minimal. Structure comes from space and hairlines, not from boxes. */
 .mkd {
   max-width: 80rem;
   margin: 0 auto;
-  padding: 1.5rem 1.5rem 5rem;
-}
-.mkd-stack {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 2.5rem;
-  margin-top: 1.5rem;
-}
-
-/* Simple page title with the theme toggle at the far end */
-.mkd-header {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-}
-.hap-page-scope .mkd-title {
-  font-size: 1.75rem;
-  line-height: 1.15;
+  padding: 1.5rem 1rem 5rem;
 }
 @media (min-width: 768px) {
-  .hap-page-scope .mkd-title {
-    font-size: 2.5rem;
+  .mkd {
+    padding: 2.5rem 2rem 6rem;
   }
 }
-.mkd-stack > section + section {
-  padding-top: 2.5rem;
-  border-top: 1px solid var(--hap-neutral);
+
+/* Header: title left, period and theme right, one row */
+.mkd-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
 }
-.mkd-caption {
+.mkd-title-wrap {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.mkd-range {
   margin-top: 0.25rem;
   font-size: 0.875rem;
+  color: var(--mk-text-muted);
+}
+.mkd-title {
+  min-width: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+@media (min-width: 768px) {
+  .mkd-title {
+    font-size: 1.875rem;
+  }
+}
+.mkd-header-tools {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
 }
 
-/* Filters: underline tabs on the left, quiet controls on the right */
-.mkd-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  align-items: flex-end;
-  justify-content: space-between;
-}
-.mkd-controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  align-items: flex-end;
-}
-.mkd-tabs {
+/* Controls: 44px touch height */
+.mkd-segment {
   display: inline-flex;
-  gap: 1.5rem;
-  border-bottom: 1px solid var(--hap-neutral);
+  padding: 3px;
+  border: 1px solid var(--mk-border);
+  border-radius: 8px;
+  background: var(--mk-surface);
 }
-.mkd-tab {
-  position: relative;
-  min-width: 44px;
+.mkd-segment-btn {
+  min-height: 38px;
+  padding: 0 0.875rem;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--mk-text-muted);
+  font: 600 0.875rem/1 system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.mkd-segment-btn[aria-pressed='true'] {
+  background: var(--mk-accent);
+  color: var(--mk-on-accent);
+}
+.mkd-icon-btn {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--mk-text-muted);
+  cursor: pointer;
+}
+.mkd-icon-btn[aria-pressed='true'] {
+  background: var(--mk-accent-soft);
+  color: var(--mk-text);
+}
+.mkd-theme {
+  border: 1px solid var(--mk-border);
+  background: var(--mk-surface);
+}
+.mkd-text-btn {
   min-height: 44px;
   padding: 0 0.5rem;
   border: 0;
+  border-radius: 8px;
   background: transparent;
-  color: var(--hap-text-light);
-  font: 600 0.9375rem/1 'Work Sans', sans-serif;
+  color: var(--mk-accent);
+  font: 600 0.875rem/1 system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  cursor: pointer;
+}
+.mkd-view {
+  display: inline-flex;
+  gap: 2px;
+}
+
+/* Key totals: one strip, five figures, dividers instead of boxes */
+.mkd-sticky {
+  border: 1px solid var(--mk-border);
+  border-radius: 10px;
+  background: var(--mk-surface);
+}
+@media (min-width: 1024px) {
+  .mkd-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+  }
+}
+.mkd-tiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.mkd-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  padding: 1.25rem 1.25rem;
+  border-top: 1px solid var(--mk-border);
+}
+.mkd-tile:nth-child(-n + 2) {
+  border-top: 0;
+}
+.mkd-tile:nth-child(even) {
+  border-left: 1px solid var(--mk-border);
+}
+.mkd-tile:last-child {
+  grid-column: 1 / -1;
+}
+.mkd-tile:last-child:nth-child(odd) {
+  border-left: 0;
+}
+.mkd-tile-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--mk-text-muted);
+}
+.mkd-tile-value {
+  margin: 0.125rem 0 0.25rem;
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.mkd-tile-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.125rem 1rem;
+  font-size: 0.8125rem;
+  color: var(--mk-text);
+}
+.mkd-tile-key {
+  color: var(--mk-text-muted);
+}
+@media (min-width: 1024px) {
+  .mkd-tiles {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  .mkd-tile,
+  .mkd-tile:nth-child(-n + 2) {
+    border-top: 0;
+  }
+  .mkd-tile + .mkd-tile,
+  .mkd-tile:nth-child(even) {
+    border-left: 1px solid var(--mk-border);
+  }
+  .mkd-tile:last-child {
+    grid-column: auto;
+  }
+  .mkd-tile:last-child:nth-child(odd) {
+    border-left: 1px solid var(--mk-border);
+  }
+  .mkd-tile-value {
+    font-size: 2.25rem;
+  }
+  .mkd-tile {
+    padding: 1.5rem;
+  }
+}
+
+/* Line tabs */
+.mkd-tabs {
+  display: flex;
+  gap: 0.25rem;
+  margin-top: 3rem;
+  border-bottom: 1px solid var(--mk-border);
+}
+.mkd-tab {
+  position: relative;
+  min-width: 64px;
+  min-height: 44px;
+  padding: 0 1rem;
+  border: 0;
+  background: transparent;
+  color: var(--mk-text-muted);
+  font: 600 0.9375rem/1 system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   cursor: pointer;
 }
 .mkd-tab[aria-selected='true'] {
-  color: var(--hap-text);
+  color: var(--mk-text);
 }
 .mkd-tab::after {
   content: '';
@@ -123,324 +258,362 @@
   right: 0;
   bottom: -1px;
   left: 0;
-  height: 2px;
-  background: var(--hap-text);
+  height: 3px;
+  background: var(--mk-accent);
   transform: scaleX(0);
-  transform-origin: left;
 }
 .mkd-tab[aria-selected='true']::after {
   transform: scaleX(1);
 }
-.mkd-field {
-  display: grid;
-  gap: 0.125rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--hap-text-light);
-}
-.mkd-select {
-  min-height: 44px;
-  padding: 0 1.5rem 0 0;
-  border: 0;
-  border-bottom: 1px solid var(--hap-border);
-  border-radius: 0;
-  background: transparent;
-  color: var(--hap-text);
-  font: 500 0.9375rem 'Work Sans', sans-serif;
-  letter-spacing: 0;
-  text-transform: none;
-}
-.mkd-theme {
-  display: grid;
-  flex: none;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  border: 1px solid var(--hap-neutral);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--hap-text-light);
-  cursor: pointer;
-}
-.mkd-theme[aria-pressed='true'] {
-  border-color: var(--hap-accent);
-  background: var(--hap-accent);
-  color: var(--hap-on-accent);
-}
 
-/* Status chips: color plus text, never color alone. Tokens come from src/styles/status-palette.css */
-.mkd-status {
-  display: inline-flex;
-  align-items: center;
-  min-height: 28px;
-  padding: 0 0.75rem;
-  border: 1px solid transparent;
-  border-radius: 999px;
-  font-size: 0.8125rem;
-  font-weight: 700;
-  white-space: nowrap;
-}
-.mkd-status--good {
-  background: var(--hap-good-tint);
-  color: var(--hap-good-ink);
-}
-.mkd-status--bad {
-  background: var(--hap-bad-tint);
-  color: var(--hap-bad-ink);
-}
-.mkd-status--neutral {
-  border-color: var(--hap-neutral);
-  color: var(--hap-text-light);
-}
-
-/* Overview: one dominant figure and four supporting figures, no boxes */
-.mkd-overview {
+/* Blocks: one bordered surface per table, header row with title and tools */
+.mkd-stack {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 2.5rem;
+  margin-top: 2rem;
 }
-@media (min-width: 1024px) {
-  .mkd-overview {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    align-items: start;
-  }
+.mkd-block {
+  border: 1px solid var(--mk-border);
+  border-radius: 10px;
+  background: var(--mk-surface);
+  overflow: hidden;
 }
-.mkd-hero {
-  display: grid;
-  gap: 0.75rem;
-  align-content: start;
+.mkd-block-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 64px;
+  padding: 0.25rem 0.75rem 0.25rem 1.5rem;
 }
-.mkd-hero-value {
-  font-family: 'Abhaya Libre', serif;
-  font-size: 4.5rem;
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: -0.01em;
-  color: var(--hap-text);
-}
-.mkd-hero-caption {
+.mkd-root h2 {
   font-size: 1rem;
+  font-weight: 700;
 }
-.mkd-verdict {
+.mkd-block-tools {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 0.75rem;
-  align-items: center;
-  margin-top: 0.5rem;
-  font-size: 0.9375rem;
-}
-.mkd-chips {
-  display: flex;
-  flex-wrap: wrap;
   gap: 0.5rem;
-  margin: 0.25rem 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.mkd-metrics {
-  margin: 1rem 0 0;
-  padding: 0;
-}
-.mkd-metric {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-areas: 'label value' 'sub value';
-  column-gap: 1rem;
   align-items: center;
-  padding: 1rem 0;
-  border-top: 1px solid var(--hap-neutral);
-}
-.mkd-metric:first-child {
-  border-top: 0;
-}
-.mkd-metric dt {
-  grid-area: label;
-  font-weight: 600;
-  color: var(--hap-text);
-}
-.mkd-metric dd {
-  margin: 0;
-}
-.mkd-metric-value {
-  grid-area: value;
-  font-family: 'Abhaya Libre', serif;
-  font-size: 2rem;
-  font-weight: 500;
-  line-height: 1.1;
-  text-align: right;
-  color: var(--hap-text);
-}
-.mkd-metric-value--empty {
-  font-family: 'Work Sans', sans-serif;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--hap-text-light);
-}
-.mkd-metric-sub {
-  grid-area: sub;
-  font-size: 0.8125rem;
-  color: var(--hap-text-light);
 }
 
-/* Charts: two columns from the desktop breakpoint, no surfaces */
-.mkd-charts {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 2.5rem;
-}
-@media (min-width: 1024px) {
-  .mkd-charts {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    align-items: start;
-    gap: 4rem;
-  }
-}
-.mkd-charts svg {
-  margin-top: 1rem;
-}
-.mkd-empty {
-  padding: 2rem 0;
-}
-.mkd-legend {
+.mkd-metric-select {
   display: flex;
-  gap: 1rem;
-  margin: 0.5rem 0 0;
-  padding: 0;
-  list-style: none;
+  gap: 0.5rem;
+  align-items: center;
   font-size: 0.8125rem;
-  color: var(--hap-text-light);
+  font-weight: 600;
+  color: var(--mk-text-muted);
 }
-.mkd-swatch {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  margin-right: 0.375rem;
-  border-radius: 2px;
-  vertical-align: -1px;
-}
-.mkd-swatch--sales {
-  background: var(--hap-accent);
-}
-.mkd-swatch--spend {
-  background: var(--hap-text-light);
+.mkd-metric-select select {
+  min-height: 44px;
+  max-width: 11rem;
+  padding: 0 0.5rem;
+  border: 1px solid var(--mk-border);
+  border-radius: 8px;
+  background: var(--mk-surface);
+  color: var(--mk-text);
+  font: 500 0.875rem system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
 }
 
-/* Results table: always visible, hairlines only, scrolls inside its own box, first column pinned */
+/* Tables: dense rows, numbers right-aligned, header and total row visually separated */
 .mkd-table-wrap {
-  margin-top: 1rem;
   overflow-x: auto;
+  border-top: 1px solid var(--mk-border);
 }
 .mkd-table {
   width: 100%;
-  min-width: 52rem;
+  min-width: 62rem;
   border-collapse: collapse;
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
+}
+.mkd-table--markets {
+  min-width: 36rem;
 }
 .mkd-table th,
 .mkd-table td {
-  padding: 0.875rem 0.75rem;
-  border-top: 1px solid var(--hap-neutral);
+  height: 52px;
+  padding: 0 1rem;
+  border-top: 1px solid var(--mk-border);
   text-align: right;
   white-space: nowrap;
-  color: var(--hap-text);
+  color: var(--mk-text);
 }
 .mkd-table thead th {
+  height: auto;
+  padding: 0;
   border-top: 0;
-  border-bottom: 1px solid var(--hap-border);
+  background: var(--mk-surface-2);
   vertical-align: bottom;
   white-space: normal;
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--hap-text-light);
+  color: var(--mk-text-muted);
 }
 .mkd-table th:first-child,
 .mkd-table td:first-child {
+  padding-left: 1.5rem;
   position: sticky;
   left: 0;
   z-index: 1;
   background: inherit;
   text-align: left;
 }
-.mkd-table thead tr,
-.mkd-row-channel {
-  background: var(--hap-bg-light);
+.mkd-table thead th:first-child {
+  padding: 0.75rem 1rem 0.75rem 1.5rem;
+}
+.mkd-table tbody tr {
+  background: var(--mk-surface);
 }
 .mkd-row-channel th,
 .mkd-row-channel td {
-  font-weight: 700;
+  font-weight: 600;
 }
 .mkd-row-campaign {
-  background: var(--hap-bg-blush);
+  background: var(--mk-surface-2);
 }
-.mkd-row-campaign th,
+.mkd-table tbody .mkd-row-campaign th {
+  padding-left: 3rem;
+  font-weight: 400;
+}
 .mkd-row-campaign td {
-  font-weight: 500;
+  font-weight: 400;
 }
-.mkd-table .mkd-campaign-name {
-  padding-left: 2.25rem;
+.mkd-table tfoot tr {
+  background: var(--mk-surface-2);
 }
-.mkd-table .mkd-action {
+.mkd-table tfoot th,
+.mkd-table tfoot td {
+  border-top: 2px solid var(--mk-border);
+  font-weight: 700;
+}
+.mkd-table td.is-sorted {
+  background: color-mix(in srgb, var(--mk-accent-soft) 45%, transparent);
+}
+
+/* Sortable headers: a real button inside each th */
+.mkd-sort {
+  display: inline-flex;
+  gap: 0.25rem;
+  align-items: flex-end;
+  justify-content: flex-end;
+  width: 100%;
+  min-height: 44px;
+  padding: 0.75rem 1rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: right;
+  cursor: pointer;
+}
+.mkd-table thead th.is-sorted {
+  color: var(--mk-text);
+}
+.mkd-sort-mark {
+  display: inline-block;
+  min-width: 0.75rem;
   text-align: left;
 }
+
 .mkd-row-toggle,
 .mkd-row-plain {
   display: inline-flex;
+  gap: 0.5rem;
   align-items: center;
-  gap: 0.625rem;
   min-height: 44px;
 }
 .mkd-row-toggle {
   padding: 0 0.25rem;
   border: 0;
-  border-radius: 8px;
+  border-radius: 6px;
   background: transparent;
-  color: var(--hap-text);
-  font: 700 0.9375rem/1 'Work Sans', sans-serif;
+  color: inherit;
+  font: inherit;
   cursor: pointer;
 }
 .mkd-row-plain {
-  padding-left: calc(0.25rem + 0.5rem + 0.625rem);
+  padding-left: calc(0.25rem + 16px + 0.5rem);
 }
 .mkd-row-count {
   font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--hap-text-light);
+  font-weight: 400;
+  color: var(--mk-text-muted);
 }
 .mkd-chevron {
-  display: inline-block;
-  width: 0.5rem;
-  height: 0.5rem;
-  border-right: 2px solid currentColor;
-  border-bottom: 2px solid currentColor;
-  transform: rotate(-45deg);
+  flex: none;
 }
 .mkd-row-toggle[aria-expanded='true'] .mkd-chevron {
-  transform: rotate(45deg);
+  transform: rotate(90deg);
 }
 
-.mkd-footnote {
-  max-width: 48rem;
-  font-size: 0.8125rem;
+/* In-cell bar behind the lead count of each market, so the ranking reads at a glance */
+.mkd-databar {
+  position: relative;
+  display: block;
+  min-width: 7rem;
+}
+.mkd-databar-fill {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  height: 22px;
+  border-radius: 3px;
+  background: var(--mk-accent-soft);
+  transform: translateY(-50%);
+}
+.mkd-databar-num {
+  position: relative;
+  padding-right: 0.25rem;
 }
 
-/* Visible keyboard focus on every interactive element */
+/* Chart view: label, bar, printed value */
+.mkd-bars {
+  display: grid;
+  margin: 0;
+  padding: 0.5rem 1.5rem 1rem;
+  border-top: 1px solid var(--mk-border);
+  list-style: none;
+}
+.mkd-bar-row {
+  display: grid;
+  grid-template-columns: minmax(7rem, 11rem) minmax(0, 1fr) minmax(5.5rem, auto);
+  gap: 1rem;
+  align-items: center;
+  min-height: 52px;
+  border-top: 1px solid var(--mk-border);
+  font-size: 0.875rem;
+}
+.mkd-bar-row:first-child {
+  border-top: 0;
+}
+.mkd-bar-row--nested {
+  padding-left: 1.25rem;
+  background: var(--mk-surface-2);
+}
+.mkd-bar-label {
+  font-weight: 600;
+}
+.mkd-bar-row--nested .mkd-bar-label {
+  font-weight: 400;
+}
+.mkd-bar-track {
+  display: block;
+  height: 16px;
+  border-radius: 3px;
+  background: var(--mk-surface-2);
+}
+.mkd-bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: 2px;
+  background: var(--mk-accent);
+}
+.mkd-bar-value {
+  font-weight: 700;
+  text-align: right;
+}
+@media (max-width: 767px) {
+  .mkd-bar-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: 'label value' 'track track';
+    row-gap: 0.25rem;
+    padding: 0.5rem 0;
+  }
+  .mkd-bar-label {
+    grid-area: label;
+  }
+  .mkd-bar-value {
+    grid-area: value;
+  }
+  .mkd-bar-track {
+    grid-area: track;
+  }
+}
+
+.mkd-empty-state {
+  padding: 4rem 1.5rem;
+  border: 1px dashed var(--mk-border);
+  border-radius: 10px;
+  text-align: center;
+}
+.mkd-empty-state p {
+  max-width: 34rem;
+  margin: 0 auto;
+  font-size: 1rem;
+}
+
+/* Phones: title and theme button share the first row, period drops below */
+@media (max-width: 767px) {
+  .mkd-header-tools {
+    display: contents;
+  }
+  .mkd-title-wrap {
+    order: 1;
+  }
+  .mkd-theme {
+    order: 2;
+  }
+  .mkd-period {
+    order: 3;
+    width: 100%;
+  }
+  .mkd-segment {
+    display: flex;
+  }
+  .mkd-segment-btn {
+    flex: 1 1 0;
+    padding: 0 0.25rem;
+    font-size: 0.8125rem;
+  }
+  .mkd-cal {
+    right: auto;
+    left: 0;
+  }
+}
+
+/* Keyboard focus on every control */
+.mkd-segment-btn:focus-visible,
+.mkd-icon-btn:focus-visible,
+.mkd-text-btn:focus-visible,
 .mkd-tab:focus-visible,
-.mkd-theme:focus-visible,
-.mkd-select:focus-visible,
+.mkd-sort:focus-visible,
 .mkd-row-toggle:focus-visible,
+.mkd-metric-select select:focus-visible,
 .mkd-table-wrap:focus-visible {
-  outline: 2px solid var(--hap-text);
-  outline-offset: 2px;
+  outline: 2px solid var(--mk-text);
+  outline-offset: -2px;
 }
 
-/* Microinteractions. Each one confirms an action the user took.
-   Opacity and color changes stay under reduced motion; movement does not. */
+/* Feedback only: press and state changes, never decoration */
+@media (prefers-reduced-motion: no-preference) {
+  .mkd-tab::after {
+    transition: transform 240ms var(--mk-ease);
+  }
+  .mkd-chevron {
+    transition: transform 150ms var(--mk-ease);
+  }
+  .mkd-segment-btn,
+  .mkd-icon-btn,
+  .mkd-text-btn,
+  .mkd-tab,
+  .mkd-sort,
+  .mkd-row-toggle {
+    transition: transform 150ms var(--mk-ease), background-color 150ms ease, color 150ms ease;
+  }
+  .mkd-segment-btn:active,
+  .mkd-icon-btn:active,
+  .mkd-text-btn:active,
+  .mkd-tab:active,
+  .mkd-sort:active,
+  .mkd-row-toggle:active {
+    transform: scale(0.97);
+  }
+  .mkd-row-campaign:not([hidden]) {
+    animation: mkd-fade 150ms var(--mk-ease);
+  }
+}
 @keyframes mkd-fade {
   from {
     opacity: 0;
@@ -449,75 +622,88 @@
     opacity: 1;
   }
 }
-/* Filter, tab or period change: the content fades in once. */
-.mkd-swap {
-  animation: mkd-fade var(--hap-dur-fast) var(--hap-ease-out);
-}
-/* Opening a channel: its campaign rows fade in. */
-.mkd-row-campaign:not([hidden]) {
-  animation: mkd-fade var(--hap-dur-fast) var(--hap-ease-out);
-}
-/* A status that changes with a filter eases its color. */
-.mkd-status {
-  transition: background-color var(--hap-dur-fast) ease, color var(--hap-dur-fast) ease;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .mkd-tab::after {
-    transition: transform var(--hap-dur-base) var(--hap-ease-out);
-  }
-  .mkd-tab,
-  .mkd-theme,
-  .mkd-row-toggle {
-    transition: transform var(--hap-dur-fast) var(--hap-ease-out), color var(--hap-dur-fast) ease;
-  }
-  .mkd-chevron {
-    transition: transform var(--hap-dur-fast) var(--hap-ease-out);
-  }
-  .mkd-tab:active,
-  .mkd-theme:active,
-  .mkd-row-toggle:active {
-    transform: scale(0.97);
-  }
-}
-
-/* Hover only on devices that really hover */
 @media (hover: hover) and (pointer: fine) {
-  .mkd-tab:hover {
-    color: var(--hap-text);
-  }
-  .mkd-row-toggle:hover .mkd-row-count {
-    color: var(--hap-text);
-  }
-  .mkd-charts svg .mkd-bar {
-    transition: opacity var(--hap-dur-fast) ease;
-  }
-  .mkd-charts svg:has(.mkd-bar:hover) .mkd-bar:not(:hover) {
-    opacity: 0.5;
+  .mkd-segment-btn:hover:not([aria-pressed='true']),
+  .mkd-icon-btn:hover,
+  .mkd-tab:hover,
+  .mkd-sort:hover {
+    color: var(--mk-text);
   }
 }
 
-/* Visually hidden, still announced to screen readers */
-.mkd-sr-only {
+/* Period picker and range calendar */
+.mkd-period {
+  position: relative;
+}
+.mkd-cal {
   position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  border: 0;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 20;
+  width: min(21rem, calc(100vw - 2rem));
+  padding: 0.5rem;
+  border: 1px solid var(--mk-border);
+  border-radius: 10px;
+  background: var(--mk-surface);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 }
-
-/* Colored figures in the results table. Text color comes from the proposed status inks. */
-.mkd-figure--good {
-  color: var(--hap-good-ink);
+.mkd-cal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.mkd-figure--bad {
-  color: var(--hap-bad-ink);
-}
-.mkd-table .mkd-figure--good,
-.mkd-table .mkd-figure--bad {
+.mkd-cal-month {
   font-weight: 700;
+}
+.mkd-icon-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.mkd-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  row-gap: 2px;
+}
+.mkd-cal-weekday {
+  padding: 0.25rem 0;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--mk-text-muted);
+}
+.mkd-cal-day {
+  height: 40px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--mk-text);
+  font: 500 0.875rem system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  cursor: pointer;
+}
+.mkd-cal-day:disabled {
+  color: var(--mk-text-muted);
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.mkd-cal-day.is-range {
+  background: var(--mk-accent-soft);
+}
+.mkd-cal-day.is-edge {
+  border-radius: 6px;
+  background: var(--mk-accent);
+  color: var(--mk-on-accent);
+  font-weight: 700;
+}
+.mkd-cal-day.is-today {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.mkd-cal-day:focus-visible {
+  outline: 2px solid var(--mk-text);
+  outline-offset: -2px;
+}
+.mkd-cal-hint {
+  padding: 0.5rem 0.25rem 0.25rem;
+  font-size: 0.8125rem;
+  color: var(--mk-text-muted);
 }
