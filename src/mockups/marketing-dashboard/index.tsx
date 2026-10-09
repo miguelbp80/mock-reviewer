@@ -274,16 +274,17 @@ const MarketingDashboard = () => {
       share: percent(t.opportunities, t.leads),
     },
     {
-      label: "Closed won",
-      value: t.closedWon,
-      cost: costPer(t.paid.spend, t.paid.closedWon),
-      share: percent(t.closedWon, t.leads),
-    },
-    {
       label: "Total sent to RES",
       value: t.sentToRes,
       cost: costPer(t.paid.spend, t.paid.sentToRes),
       share: percent(t.sentToRes, t.leads),
+    },
+    {
+      label: "Closed won",
+      key: true,
+      value: t.closedWon,
+      cost: costPer(t.paid.spend, t.paid.closedWon),
+      share: percent(t.closedWon, t.leads),
     },
   ];
 
@@ -343,21 +344,22 @@ const MarketingDashboard = () => {
   return (
     <div className={`mkd-root${dark ? " is-dark" : ""}`}>
       <main className="mkd">
-        <header className="mkd-header">
-          <div className="mkd-title-wrap">
+        {/* Title, filters, theme button and key totals stay fixed together on desktop. */}
+        <div className="mkd-sticky-group">
+          <header className="mkd-header">
             <h1 className="mkd-title">Marketing dashboard</h1>
-            <p className="mkd-range">{rangeLabel(range)}</p>
-          </div>
-          <div className="mkd-header-tools">
-            <PeriodPicker
-              preset={preset}
-              custom={custom}
-              today={today}
-              onChange={(p, r) => {
-                setPreset(p);
-                if (r) setCustom(r);
-              }}
-            />
+            <div className="mkd-filters-bar">
+              <PeriodPicker
+                preset={preset}
+                custom={custom}
+                today={today}
+                onChange={(p, r) => {
+                  setPreset(p);
+                  if (r) setCustom(r);
+                }}
+              />
+              <p className="mkd-range">{rangeLabel(range)}</p>
+            </div>
             <button
               type="button"
               className="mkd-icon-btn mkd-theme"
@@ -368,29 +370,30 @@ const MarketingDashboard = () => {
             >
               {dark ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
             </button>
-          </div>
-        </header>
+          </header>
 
-        <section className="mkd-sticky" aria-label="Key totals">
-          <dl className="mkd-tiles">
-            {tiles.map((tile) => (
-              <div className="mkd-tile" key={tile.label}>
-                <dt className="mkd-tile-label">{tile.label}</dt>
-                <dd className="mkd-tile-value">{count.format(tile.value)}</dd>
-                <dd className="mkd-tile-meta">
-                  <span>
-                    <span className="mkd-tile-key">Cost</span> {tile.cost}
-                  </span>
-                  {tile.share && (
-                    <span>
-                      <span className="mkd-tile-key">Of leads</span> {tile.share}
+          <section className="mkd-sticky" aria-label="Key totals and cost">
+            <dl className="mkd-tiles">
+              {tiles.map((tile) => (
+                <div className={`mkd-tile${tile.key ? " mkd-tile--key" : ""}`} key={tile.label}>
+                  <dt className="mkd-tile-label">{tile.label} / cost</dt>
+                  <dd className="mkd-tile-main">
+                    <span className="mkd-tile-pair">
+                      <span className="mkd-tile-num">{count.format(tile.value)}</span>
+                      <span className="mkd-tile-sep" aria-hidden="true">
+                        /
+                      </span>
+                      <span className="mkd-sr-only">, </span>
+                      {tile.cost.startsWith("$") && <span className="mkd-tile-num">{tile.cost}</span>}
                     </span>
-                  )}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </section>
+                    {!tile.cost.startsWith("$") && <span className="mkd-tile-unit">{tile.cost}</span>}
+                  </dd>
+                  {tile.share && <dd className="mkd-tile-share">{tile.share} of leads</dd>}
+                </div>
+              ))}
+            </dl>
+          </section>
+        </div>
 
         <div role="tablist" aria-label="Business line" className="mkd-tabs">
           {LINES.map((l) => (

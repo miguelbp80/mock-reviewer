@@ -114,6 +114,7 @@ export const getChannelRows = (line: LineId, days: number): Record<ChannelId, Ch
   };
 };
 
+// TODO: with real data, mark the "Core" and "HAP priority" markets (e.g. a tag per market) and highlight them in the table.
 export type MarketRow = {
   market: string;
   leads: number;
